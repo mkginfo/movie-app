@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+*:focus {
+  outline: none;
+}
+
+.img {
+  width: 100%;
+  margin-bottom: 18%;
+}
+.card-picture {
+  width: 23%;
+  margin-bottom: 2%;
+}
+.container {
+  min-height: 100%;
+  width: 100%;
+}
+.search-form {
+  width: 100%;
+}
+
+.loading {
+  justify-content: center;
+  padding: 10px;
+  margin: 10px;
+}
+.page-nav-title,  .page-sub-title{
+  font-size: 14px;
+  margin: 15px;
+  box-shadow: none;
+}

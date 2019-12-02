@@ -1,4 +1,6 @@
-# MovieApp
+# Movie App
+
+Movies Search Application made using Angular (version 8) with OMDB Api.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
