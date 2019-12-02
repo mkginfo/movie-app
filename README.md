@@ -11,12 +11,22 @@ Consumes data from the OMDB API, on each key press updates the search results wi
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Install yarn package manager
+
+> npm install -g yarn@latest
+
+> yarn install
+
+Run `yarn start for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `yarn build-prod` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+> yarn install -g angular-cli-ghpages
+
+> yarn build-deploy
 
 ## Running unit tests
 
