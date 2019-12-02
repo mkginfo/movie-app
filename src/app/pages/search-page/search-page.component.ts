@@ -46,10 +46,8 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSeachChange(event) {
-    if (event) {
+  onSeachChange() {
       this.getMovies(this.searchText);
-    }
   }
 
   getMovies(title: string) {

@@ -1,119 +1,107 @@
 <p class="page-nav-title">
-  Home / Search Page -
+    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+    <span class="vertical-align-super">Home / Search Page </span>
 </p>
 
 <p class="page-sub-title">
-  Welcome to Movie App . You can now search for your favorite movie here.
+    Welcome to Movie App . You can now search for your favorite movie here.
 </p>
 
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
-  <form class="search-form" fxLayout="row" fxLayoutAlign="center" (submit)="onSeachChange(searchText)">
-    <mat-form-field appearance="outline" class="search-full-width">
-      <mat-label>Search movies</mat-label>
-      <input matInput placeholder="Search movies"
-             [formControl]="searchFormControl" [(ngModel)]="searchText"
-             [errorStateMatcher]="matcher">
-      <mat-error *ngIf="searchFormControl.hasError('required')">
-        Please enter a valid <strong>movie name</strong>.
-      </mat-error>
-      <mat-icon matSuffix (click)="onSeachChange(searchText)">search</mat-icon>
-    </mat-form-field>
-  </form>
+    <form class="search-form" fxLayout="row" fxLayoutAlign="center" (submit)="onSeachChange()">
+        <mat-form-field appearance="outline" class="search-full-width">
+            <mat-label>Search movies</mat-label>
+            <input matInput placeholder="Search movies" [formControl]="searchFormControl" [(ngModel)]="searchText" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="searchFormControl.hasError('required')">
+                Please enter a valid <strong>movie name</strong>.
+            </mat-error>
+            <mat-icon matSuffix (click)="onSeachChange()">search</mat-icon>
+        </mat-form-field>
+    </form>
 
 </div>
 
 <div class="loading" *ngIf="loading" fxLayout="row" fxLayoutAlign="center">
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="center">
-  <div *ngIf="errorLog">
-    {{errorLog}}
-  </div>
+    <div *ngIf="errorLog">
+        {{errorLog}}
+    </div>
 </div>
 
-<div
-  class="search-items"
-  fxLayout="row wrap"
-  fxLayout.lt-sm="column"
-  fxLayoutGap="32px"
-  fxLayoutAlign="flex-start">
-  <ng-container *ngFor="let movies of movies">
-    <div
-      fxFlex="0 1 calc(33.3% - 32px)"
-      fxFlex.lt-md="0 1 calc(50% - 32px)"
-      fxFlex.lt-sm="100%"
-    >
-      <mat-card>
-        <div [ngSwitch]="movies?.Poster === 'N/A' || movies?.Poster !== 'N/A'">
-          <img mat-card-image class="img-responsive" *ngSwitchCase="movies?.Poster !== 'N/A'"
-           [src]="movies?.Poster">
-          <img mat-card-image class="img-responsive" *ngSwitchCase="movies?.Poster === 'N/A'"
-             src="https://placeimg.com/300/415/any">
-        </div>
-        <mat-card-header>
-          <div mat-card-avatar>
-            <span *ngIf="movies?.Metascore && movies?.Metascore !== 'N/A'">{{ movies?.Metascore }}</span>
-            <h3 *ngIf="movies?.imdbRating && movies?.imdbRating !== 'N/A'">{{ movies?.imdbRating }}</h3>
-          </div>
-          <mat-card-title>{{ movies?.Title }} ({{ movies?.Year }})</mat-card-title>
-          <mat-card-subtitle>
-            <span *ngIf="movies?.Rated && movies?.Rated !== 'N/A'"> {{ movies?.Rated }} |</span>
-            <span *ngIf="movies?.Runtime && movies?.Runtime !== 'N/A'"> {{ movies?.Runtime }} |</span>
-            <span *ngIf="movies?.Language && movies?.Language !== 'N/A'"> {{ movies?.Language }} |</span>
-            <span *ngIf="movies?.Released && movies?.Released !== 'N/A'"> {{ movies?.Released }}</span>
-            <span *ngIf="movies?.Country && movies?.Country !== 'N/A'"> ({{ movies?.Country }}) </span>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <div>
-            <div *ngIf="movies?.Type && movies?.Type !== 'N/A'" class="text-success">
-              <p><b>Type </b> : <span>{{ movies?.Type }}</span></p>
-            </div>
+<div class="search-items" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+    <ng-container *ngFor="let movies of movies">
+        <div fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+            <mat-card>
+                <div [ngSwitch]="movies?.Poster === 'N/A' || movies?.Poster !== 'N/A'">
+                    <img mat-card-image class="img-responsive" *ngSwitchCase="movies?.Poster !== 'N/A'" [src]="movies?.Poster">
+                    <img mat-card-image class="img-responsive" *ngSwitchCase="movies?.Poster === 'N/A'" src="https://placeimg.com/300/415/any">
+                </div>
+                <mat-card-header>
+                    <div mat-card-avatar>
+                        <span *ngIf="movies?.Metascore && movies?.Metascore !== 'N/A'">{{ movies?.Metascore }}</span>
+                        <h3 *ngIf="movies?.imdbRating && movies?.imdbRating !== 'N/A'">{{ movies?.imdbRating }}</h3>
+                    </div>
+                    <mat-card-title>{{ movies?.Title }} ({{ movies?.Year }})</mat-card-title>
+                    <mat-card-subtitle>
+                        <span *ngIf="movies?.Rated && movies?.Rated !== 'N/A'"> {{ movies?.Rated }} |</span>
+                        <span *ngIf="movies?.Runtime && movies?.Runtime !== 'N/A'"> {{ movies?.Runtime }} |</span>
+                        <span *ngIf="movies?.Language && movies?.Language !== 'N/A'"> {{ movies?.Language }} |</span>
+                        <span *ngIf="movies?.Released && movies?.Released !== 'N/A'"> {{ movies?.Released }}</span>
+                        <span *ngIf="movies?.Country && movies?.Country !== 'N/A'"> ({{ movies?.Country }}) </span>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div>
+                        <div *ngIf="movies?.Type && movies?.Type !== 'N/A'" class="text-success">
+                            <p><b>Type </b> : <span>{{ movies?.Type }}</span></p>
+                        </div>
 
-            <div *ngIf="movies?.Genre && movies?.Genre !== 'N/A'">
-              <b>Genre</b>
-              <ul *ngFor="let genre of movies?.Genre.split(',')">
-                <li>{{genre}}</li>
-              </ul>
-            </div>
-            <div *ngIf="movies?.Director && movies?.Director !== 'N/A'">
-              <b>Director</b>
-              <ul *ngFor="let director of movies?.Director.split(',')">
-                <li>{{director}}</li>
-              </ul>
-            </div>
-            <div *ngIf="movies?.Actors && movies?.Actors !== 'N/A'">
-              <b>Actors</b>
-              <ul *ngFor="let actor of movies?.Actors.split(',')">
-                <li>{{actor}}</li>
-              </ul>
-            </div>
-            <div *ngIf="movies?.Writer && movies?.Writer !== 'N/A'">
-              <b>Writer</b>
-              <ul *ngFor="let writer of movies?.Writer.split(',')">
-                <li>{{writer}}</li>
-              </ul>
-            </div>
-            <div *ngIf="movies?.Plot && movies?.Plot !== 'N/A'">
-              <b>Summary</b>
-              <p>{{ movies?.Plot }}</p>
-            </div>
-            <div *ngIf="movies?.Production && movies?.Production !== 'N/A'">
-              <b>Production</b>
-              <p>{{ movies?.Production }}</p>
-            </div>
-            <div *ngIf="movies?.Awards && movies?.Awards !== 'N/A'" class="text-success">
-              <b>Awards</b>
-              <p>{{ movies?.Awards }}</p>
-            </div>
-            <div>
-              <a href="http://www.imdb.com/title/{{movies?.imdbID}}" target="_blank">See more at Imdb</a>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </ng-container>
+                        <div *ngIf="movies?.Genre && movies?.Genre !== 'N/A'">
+                            <b>Genre</b>
+                            <ul *ngFor="let genre of movies?.Genre.split(',')">
+                                <li>{{genre}}</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="movies?.Director && movies?.Director !== 'N/A'">
+                            <b>Director</b>
+                            <ul *ngFor="let director of movies?.Director.split(',')">
+                                <li>{{director}}</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="movies?.Actors && movies?.Actors !== 'N/A'">
+                            <b>Actors</b>
+                            <ul *ngFor="let actor of movies?.Actors.split(',')">
+                                <li>{{actor}}</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="movies?.Writer && movies?.Writer !== 'N/A'">
+                            <b>Writer</b>
+                            <ul *ngFor="let writer of movies?.Writer.split(',')">
+                                <li>{{writer}}</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="movies?.Plot && movies?.Plot !== 'N/A'">
+                            <b>Summary</b>
+                            <p>{{ movies?.Plot }}</p>
+                        </div>
+                        <div *ngIf="movies?.Production && movies?.Production !== 'N/A'">
+                            <b>Production</b>
+                            <p>{{ movies?.Production }}</p>
+                        </div>
+                        <div *ngIf="movies?.Awards && movies?.Awards !== 'N/A'" class="text-success">
+                            <b>Awards</b>
+                            <p>{{ movies?.Awards }}</p>
+                        </div>
+                        <div>
+                            <a href="http://www.imdb.com/title/{{movies?.imdbID}}" target="_blank">See more at Imdb</a>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </ng-container>
 </div>
