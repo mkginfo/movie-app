@@ -1,13 +1,10 @@
-export enum MovieTypes {
-  Movie = 'movie',
-  Series = 'series',
-  Episode = 'episode',
-  Any = ''
-}
-
-export class Rating {
-  Source: string;
-  Value: string;
+export interface MovieList {
+  Response: 'True' | 'False';
+  Search?: Movie[];
+  totalResults?: number;
+  Error?: string;
+  searchText?: string;
+  page?: number;
 }
 
 export interface Movie {
@@ -16,15 +13,6 @@ export interface Movie {
   Type: MovieTypes;
   Year: string;
   imdbID: string;
-}
-
-export interface MovieList {
-  Response: 'True' | 'False';
-  Search?: Movie[];
-  totalResults?: number;
-  Error?: string;
-  searchText?: string;
-  page?: number;
 }
 
 export interface MovieDetails extends Movie {
@@ -49,4 +37,16 @@ export interface MovieDetails extends Movie {
   Production: string;
   Website: string;
   Response: string;
+}
+
+export enum MovieTypes {
+  Movie = 'movie',
+  Series = 'series',
+  Episode = 'episode',
+  Any = ''
+}
+
+export class Rating {
+  Source: string;
+  Value: string;
 }

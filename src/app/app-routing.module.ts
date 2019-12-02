@@ -8,6 +8,7 @@ import {NotFoundPageComponent} from './pages/not-found-page/not-found.page.compo
 const routes: Routes = [
   {path: '', redirectTo: '/featured/bridge', pathMatch: 'full'},
   {path: 'search', component: SearchPageComponent},
+  {path: 'home/:title', component: SearchPageComponent},
   {path: 'featured', component: FeaturePageComponent},
   {path: 'featured/:title', component: FeaturePageComponent},
   { path: '**', component: NotFoundPageComponent }

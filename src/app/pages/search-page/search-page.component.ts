@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {OmdbService} from '../../services/omdb.service';
 import {MovieDetails} from '../../models/movie.model';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
-/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -16,37 +17,47 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent implements OnInit, OnDestroy {
 
   public loading: boolean;
+  private subscription: Subscription;
   public searchText = '';
   public movies: MovieDetails[];
   public errorLog: string;
+  public selectedPlot = '';
   public searchFormControl = new FormControl('', [
     Validators.required,
   ]);
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private omdbService: OmdbService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private omdbService: OmdbService
+  ) { }
 
   ngOnInit() {
+    this.searchText = '';
+    this.route.params.subscribe(params => {
+      this.searchText = params.title;
+      if (params.title) {
+        this.getMovies(params.title);
+      }
+    });
   }
 
   onSeachChange(event) {
-    console.log(event);
     if (event) {
-      console.log(this.searchText);
       this.getMovies(this.searchText);
     }
   }
 
-  getMovies(title: string = 'bridge') {
+  getMovies(title: string) {
     this.loading = true;
-    this.omdbService.getMoviesFullDatilsByTitle(title, 5)
+    this.movies = null;
+    this.subscription = this.omdbService.getMoviesFullDatilsByTitle(title, 5)
       .subscribe((movies) => {
         this.movies = movies;
-        console.log('movies--!!##', movies);
         this.loading = false;
       }, error => {
         this.loading = false;
@@ -61,6 +72,12 @@ export class SearchPageComponent implements OnInit {
         }
         this.movies = null;
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

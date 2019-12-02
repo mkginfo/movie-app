@@ -2,6 +2,15 @@
   <mat-toolbar-row>
     <div class="app-name">Movie App</div>
     <span class="ma-spacer"></span>
+    <span fxHide.lt-sm="true" fxShow.gt-xs="true">
+      <span class="ma-icon" routerLink="/home/2019" [routerLinkActive]="'is-active'">Home</span>
+      <span class="ma-icon" routerLink="/search" [routerLinkActive]="'is-active'">Serach</span>
+      <span class="ma-icon" routerLink="/featured/bridge" [routerLinkActive]="'is-active'">Featured</span>
+    </span>
+  </mat-toolbar-row>
+  <mat-toolbar-row fxShow.lt-sm="true" fxHide.gt-xs="true">
+    <span class="ma-spacer"></span>
+    <span class="ma-icon" routerLink="/home/2019" [routerLinkActive]="'is-active'">Home</span>
     <span class="ma-icon" routerLink="/search" [routerLinkActive]="'is-active'">Serach</span>
     <span class="ma-icon" routerLink="/featured/bridge" [routerLinkActive]="'is-active'">Featured</span>
   </mat-toolbar-row>

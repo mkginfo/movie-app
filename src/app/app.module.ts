@@ -17,8 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {FlexLayoutModule } from '@angular/flex-layout';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -40,6 +39,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatIconModule,
     MatInputModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
   ],
   providers: [],

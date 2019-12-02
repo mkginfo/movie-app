@@ -2,7 +2,8 @@
   min-width: 150px;
   max-width: 500px;
   width: 100%;
-  margin: 10px;
+  margin: 10px 0;
+  padding: 10px;
 }
 
 .search-full-width {
@@ -15,4 +16,10 @@
   mat-card{
     margin-bottom: 10px;
   }
+}
+
+.img-responsive {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 }

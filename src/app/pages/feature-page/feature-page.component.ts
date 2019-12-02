@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MovieService} from '../../services/movie.service';
 import {Observable, Subscription} from 'rxjs';
 import {Movie, MovieDetails, MovieList} from '../../models/movie.model';
@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './feature-page.component.html',
   styleUrls: ['./feature-page.component.scss']
 })
-export class FeaturePageComponent implements OnInit {
+export class FeaturePageComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   public loading: boolean;
@@ -43,7 +43,6 @@ export class FeaturePageComponent implements OnInit {
         } else {
           console.log('Error in Service response', error);
         }
-
       });
   }
 
@@ -51,4 +50,9 @@ export class FeaturePageComponent implements OnInit {
   public isNotFound = () => this.movieService.notFound;
   public isNotProvided = () => this.movieService.notProvided;
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

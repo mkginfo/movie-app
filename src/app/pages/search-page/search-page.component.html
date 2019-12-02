@@ -1,6 +1,6 @@
-<h4 class="page-nav-title">
+<p class="page-nav-title">
   Home / Search Page -
-</h4>
+</p>
 
 <p class="page-sub-title">
   Welcome to Movie App . You can now search for your favorite movie here.
@@ -9,13 +9,15 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
   <form class="search-form" fxLayout="row" fxLayoutAlign="center" (submit)="onSeachChange(searchText)">
-    <mat-form-field class="search-full-width">
+    <mat-form-field appearance="outline" class="search-full-width">
+      <mat-label>Search movies</mat-label>
       <input matInput placeholder="Search movies"
              [formControl]="searchFormControl" [(ngModel)]="searchText"
              [errorStateMatcher]="matcher">
       <mat-error *ngIf="searchFormControl.hasError('required')">
         Please enter a valid <strong>movie name</strong>.
       </mat-error>
+      <mat-icon matSuffix (click)="onSeachChange(searchText)">search</mat-icon>
     </mat-form-field>
   </form>
 
@@ -46,9 +48,9 @@
       <mat-card>
         <div [ngSwitch]="movies?.Poster === 'N/A' || movies?.Poster !== 'N/A'">
           <img mat-card-image class="img-responsive" *ngSwitchCase="movies?.Poster !== 'N/A'"
-               [src]="movies?.Poster">
+           [src]="movies?.Poster">
           <img mat-card-image class="img-responsive" *ngSwitchCase="movies?.Poster === 'N/A'"
-               src="https://placeimg.com/300/415/any">
+             src="https://placeimg.com/300/415/any">
         </div>
         <mat-card-header>
           <div mat-card-avatar>
@@ -72,19 +74,27 @@
 
             <div *ngIf="movies?.Genre && movies?.Genre !== 'N/A'">
               <b>Genre</b>
-              <p *ngFor="let genre of movies?.Genre.split(',')">{{genre}} <br></p>
+              <ul *ngFor="let genre of movies?.Genre.split(',')">
+                <li>{{genre}}</li>
+              </ul>
             </div>
             <div *ngIf="movies?.Director && movies?.Director !== 'N/A'">
               <b>Director</b>
-              <p *ngFor="let director of movies?.Director.split(',')">{{director}} <br></p>
+              <ul *ngFor="let director of movies?.Director.split(',')">
+                <li>{{director}}</li>
+              </ul>
             </div>
             <div *ngIf="movies?.Actors && movies?.Actors !== 'N/A'">
               <b>Actors</b>
-              <p *ngFor="let actor of movies?.Actors.split(',')">{{actor}} <br></p>
+              <ul *ngFor="let actor of movies?.Actors.split(',')">
+                <li>{{actor}}</li>
+              </ul>
             </div>
             <div *ngIf="movies?.Writer && movies?.Writer !== 'N/A'">
               <b>Writer</b>
-              <p *ngFor="let writer of movies?.Writer.split(',')">{{writer}} <br></p>
+              <ul *ngFor="let writer of movies?.Writer.split(',')">
+                <li>{{writer}}</li>
+              </ul>
             </div>
             <div *ngIf="movies?.Plot && movies?.Plot !== 'N/A'">
               <b>Summary</b>
